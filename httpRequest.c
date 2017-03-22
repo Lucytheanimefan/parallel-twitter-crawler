@@ -6,6 +6,12 @@
 #include <netinet/in.h> /* struct sockaddr_in, struct sockaddr */
 #include <netdb.h> /* struct hostent, gethostbyname */
 
+char TWITTER_CONSUMER_KEY[] = "gPFX6uLLPSq1YNV3UvOOmxBm9";
+char TWITTER_CONSUMER_SECRET[] = "A9OFNbEcGFBfV0GNt9dwx2AWncPRrcGBbueVzdl8e3FEdd1EJk";
+char TWITTER_ACCESS_TOKEN_KEY[] = "1486245986-QrZJp6vH6DDzjMJXUCQ0y5sl9eiCJVLRv30agdq";
+char TWITTER_ACCESS_TOKEN_SECRET[] = "lzXe6UKt8vCPQOR5WesgErMJ8Ip0XpNvhhYLgEmStfF6r";
+
+
 void error(const char *msg) { perror(msg); exit(0); }
 
 int main(int argc,char *argv[])
@@ -21,18 +27,18 @@ int main(int argc,char *argv[])
 
     /* first what are we going to send and where are we going to send it? */
     int portno =        80;
-    char *host =        "google.com";//"cs590.herokuapp.com";
-    char *message_fmt = "GET /%s HTTP/1.0\r\n\r\n";
+    char *host =        "api.twitter.com";//"cs590.herokuapp.com";
+    char *message_fmt = "%s /%s HTTP/1.0\r\n\r\n";
 
     struct hostent *server;
     struct sockaddr_in serv_addr;
     int sockfd, bytes, sent, received, total;
     char message[1024],response[4096];
 
-    if (argc < 1) { puts("Parameters: <command>"); exit(0); }
+    if (argc < 1) { puts("Parameters: <Request type> <command>"); exit(0); }
 
     /* fill in the parameters */
-    sprintf(message,message_fmt,argv[1]);
+    sprintf(message,message_fmt,argv[1],argv[2]);
     printf("Request:\n%s\n",message);
 
     /* create the socket */
