@@ -10,17 +10,25 @@ void error(const char *msg) { perror(msg); exit(0); }
 
 int main(int argc,char *argv[])
 {
+    //print argv
+    puts("ARGV");
+    int index;
+    for( index = 0; index < (sizeof( argv ) / sizeof( argv[0] )); index++){
+        printf( "%d", argv[index]);
+        printf( "\n" );
+    }
+
     /* first what are we going to send and where are we going to send it? */
     int portno =        80;
     char *host =        "cs590.herokuapp.com";
-    char *message_fmt = "POST /apikey=%s&command=%s HTTP/1.0\r\n\r\n";
+    char *message_fmt = "GET %s HTTP/1.0\r\n\r\n";
 
     struct hostent *server;
     struct sockaddr_in serv_addr;
     int sockfd, bytes, sent, received, total;
     char message[1024],response[4096];
 
-    if (argc < 3) { puts("Parameters: <apikey> <command>"); exit(0); }
+    if (argc < 2) { puts("Parameters: <endpoint>"); exit(0); }
 
     /* fill in the parameters */
     sprintf(message,message_fmt,argv[1],argv[2]);
@@ -61,7 +69,10 @@ int main(int argc,char *argv[])
     total = sizeof(response)-1;
     received = 0;
     do {
-        bytes = read(sockfd,response+received,total-received);
+        printf("RESPONSE: %s\n", response);
+        // HANDLE RESPONSE CHUCK HERE BY, FOR EXAMPLE, SAVING TO A FILE.
+        memset(response, 0, sizeof(response));
+        bytes = recv(sockfd,response+received,total-received);
         if (bytes < 0)
             error("ERROR reading response from socket");
         if (bytes == 0)
