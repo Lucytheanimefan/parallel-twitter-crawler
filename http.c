@@ -27,7 +27,7 @@ int main(int argc,char *argv[])
     message_size=0;
     if(!strcmp(argv[3],"GET"))
     {
-        message_size+=strlen("%s %s%s%s HTTP/1.1\r\n");        /* method         */
+        message_size+=strlen("%s %s%s%s HTTP/1.0\r\n");        /* method         */
         message_size+=strlen(argv[3]);                         /* path           */
         message_size+=strlen(argv[4]);                         /* headers        */
         if(argc>5)
@@ -38,7 +38,7 @@ int main(int argc,char *argv[])
     }
     else
     {
-        message_size+=strlen("%s %s HTTP/1.1\r\n");
+        message_size+=strlen("%s %s HTTP/1.0\r\n");
         message_size+=strlen(argv[3]);                         /* method         */
         message_size+=strlen(argv[4]);                         /* path           */
         for(i=6;i<argc;i++)                                    /* headers        */
@@ -57,13 +57,13 @@ int main(int argc,char *argv[])
     if(!strcmp(argv[3],"GET"))
     {
         if(argc>5)
-            sprintf(message,"%s %s%s%s HTTP/1.1\r\n",
+            sprintf(message,"%s %s%s%s HTTP/1.0\r\n",
                 strlen(argv[3])>0?argv[3]:"GET",               /* method         */
                 strlen(argv[4])>0?argv[4]:"/",                 /* path           */
                 strlen(argv[5])>0?"?":"",                      /* ?              */
                 strlen(argv[5])>0?argv[5]:"");                 /* query string   */
         else
-            sprintf(message,"%s %s HTTP/1.1\r\n",
+            sprintf(message,"%s %s HTTP/1.0\r\n",
                 strlen(argv[3])>0?argv[3]:"GET",               /* method         */
                 strlen(argv[4])>0?argv[4]:"/");                /* path           */
         for(i=6;i<argc;i++)                                    /* headers        */
@@ -72,7 +72,7 @@ int main(int argc,char *argv[])
     }
     else
     {
-        sprintf(message,"%s %s HTTP/1.1\r\n",
+        sprintf(message,"%s %s HTTP/1.0\r\n",
             strlen(argv[3])>0?argv[3]:"POST",                  /* method         */
             strlen(argv[4])>0?argv[4]:"/");                    /* path           */
         for(i=6;i<argc;i++)                                    /* headers        */
