@@ -43,6 +43,9 @@ int main(int argc,char *argv[])
     server = gethostbyname(host);
     if (server == NULL) error("ERROR, no such host");
 
+    puts("SERVER")
+    puts(server)
+
     /* fill in the structure */
     memset(&serv_addr,0,sizeof(serv_addr));
     serv_addr.sin_family = AF_INET;
