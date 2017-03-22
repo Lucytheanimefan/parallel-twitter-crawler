@@ -72,7 +72,7 @@ int main(int argc,char *argv[])
     }
     else
     {
-        sprintf(message,"%s %s HTTP/1.0\r\n",
+        sprintf(message,"%s %s HTTP/1.1\r\n",
             strlen(argv[3])>0?argv[3]:"POST",                  /* method         */
             strlen(argv[4])>0?argv[4]:"/");                    /* path           */
         for(i=6;i<argc;i++)                                    /* headers        */
