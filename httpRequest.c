@@ -27,7 +27,7 @@ int main(int argc,char *argv[])
 
     /* first what are we going to send and where are we going to send it? */
     int portno =        80;
-    char *host =        "api.twitter.com";//"cs590.herokuapp.com";
+    char *host =        "cs590.herokuapp.com";
     char *message_fmt = "%s /%s HTTP/1.0\r\n\r\n";
 
     struct hostent *server;
@@ -35,7 +35,7 @@ int main(int argc,char *argv[])
     int sockfd, bytes, sent, received, total;
     char message[1024],response[4096];
 
-    if (argc < 1) { puts("Parameters: <Request type> <command>"); exit(0); }
+    if (argc < 2) { puts("Parameters: <Request type> <command>"); exit(0); }
 
     /* fill in the parameters */
     sprintf(message,message_fmt,argv[1],argv[2]);
