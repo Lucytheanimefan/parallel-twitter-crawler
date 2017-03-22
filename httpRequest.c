@@ -13,7 +13,7 @@ int main(int argc,char *argv[])
     //print argv
     puts("ARGV");
     int index;
-    for( index = 0; index < (sizeof( argv ) / sizeof( argv[0] )); index++){
+    for( index = 0; index < (sizeof(argv) / sizeof(argv[0])); index++){
         printf( "%d", argv[index]);
         printf( "\n" );
     }
@@ -21,17 +21,17 @@ int main(int argc,char *argv[])
     /* first what are we going to send and where are we going to send it? */
     int portno =        80;
     char *host =        "cs590.herokuapp.com";
-    char *message_fmt = "GET %s HTTP/1.0\r\n\r\n";
+    char *message_fmt = "POST /%s HTTP/1.0\r\n\r\n";
 
     struct hostent *server;
     struct sockaddr_in serv_addr;
     int sockfd, bytes, sent, received, total;
     char message[1024],response[4096];
 
-    if (argc < 2) { puts("Parameters: <endpoint>"); exit(0); }
+    if (argc < 3) { puts("Parameters: <apikey> <command>"); exit(0); }
 
     /* fill in the parameters */
-    sprintf(message,message_fmt,argv[1],argv[2]);
+    sprintf(message,message_fmt,argv[1]);
     printf("Request:\n%s\n",message);
 
     /* create the socket */
