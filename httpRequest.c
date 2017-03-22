@@ -12,7 +12,7 @@ int main(int argc,char *argv[])
 {
     /* first what are we going to send and where are we going to send it? */
     int portno =        80;
-    char *host =        "api.somesite.com";
+    char *host =        "http://cs590.herokuapp.com/NYT.txt";
     char *message_fmt = "POST /apikey=%s&command=%s HTTP/1.0\r\n\r\n";
 
     struct hostent *server;
