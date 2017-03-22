@@ -11,12 +11,13 @@ void error(const char *msg) { perror(msg); exit(0); }
 int main(int argc,char *argv[])
 {
     //print argv
+    /*
     puts("ARGV");
     int index;
     for( index = 0; index < (sizeof(argv) / sizeof(argv[0])); index++){
         printf( "%d", argv[index]);
         printf( "\n" );
-    }
+    }*/
 
     /* first what are we going to send and where are we going to send it? */
     int portno =        80;
@@ -71,8 +72,7 @@ int main(int argc,char *argv[])
     do {
         printf("RESPONSE: %s\n", response);
         // HANDLE RESPONSE CHUCK HERE BY, FOR EXAMPLE, SAVING TO A FILE.
-        memset(response, 0, sizeof(response));
-        bytes = recv(sockfd,response+received,total-received);
+         bytes = read(sockfd,response+received,total-received);
         if (bytes < 0)
             error("ERROR reading response from socket");
         if (bytes == 0)
